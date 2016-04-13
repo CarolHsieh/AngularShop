@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+
+    <link rel="stylesheet" href="../../vendor/bootstrap3/css/bootstrap.min.css">
+
+    <style>
+        .orderColor{
+            color:red;
+
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container" ng-controller="produncController">
+    <nav class="navbar navbar-default" role="navigation">
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" role="search">
+
+                <div class="form-group">
+                    產品搜尋<input type="text" class="form-control" placeholder="search" ng-model="search">
+                </div>
+
+            </form>
+
+        </div>
+
+
+    </nav>
+
+<table class="table" ng-show="cart.length">
+    <thead>
+    <tr>
+        <th ng-click="changeOrder('id')" ng-class="{dropup:order===''}">產品編號
+            <span ng-class="{orderColor:orderType==='id'}" class="caret"></span>
+        </th>
+        <th ng-click="changeOrder('name')" ng-class="{dropup:order===''}">產品名稱
+            <span ng-class="{orderColor:orderType==='name'}" class="caret"></span>
+        </th>
+        <th ng-click="changeOrder('quantity')" ng-class="{dropup:order===''}">購買數量
+            <span ng-class="{orderColor:orderType==='quantity'}" class="caret"></span>
+        </th>
+        <th ng-click="changeOrder('price')" ng-class="{dropup:order===''}">產品單價
+            <span ng-class="{orderColor:orderType=='price'}" class="caret"></span>
+        </th>
+        <th ng-click="changeOrder('totalPrice')" ng-class="{dropup:order===''}">產品總價
+            <span class="caret"></span>
+        </th>
+        <th>操作</th>
+    </tr>
+
+
+    </thead>
+
+    <tbody>
+
+    <tr ng-repeat="item in cart | filter:search | orderBy: order + orderType">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>
+
+            <button ng-click="reduce(item.id)" class="btn btn-main">-</button>
+            <input type="text" value="{{item.quantity}}" ng-model="item.quantity" />
+
+            <button ng-click="add(item.id)" class="btn btn-main">+</button>
+        </td>
+        <td>{{item.price|currency:"NT$"}}</td>
+        <td>{{item.quantity * item.price|currency:"NT$"}}</td>
+        <td>
+            <button type="button" ng-click="remove(item.id)" class="btn btn-danger">移除</button>
+        </td>
+    </tr>
+    <tr>
+        <td>總價</td>
+        <td>{{totalPrice() | currency:"NT$"}}</td>
+        <td>    總數量</td>
+        <td>{{totalCount()}}</td>
+
+        <td colspan="2"><button type="button" ng-click="cart={}" class="btn btn-danger">清空購物車</button></td>
+    </tr>
+    </tbody>
+
+</table>
+
+<p ng-hide="cart.length">購物車為空</p>
+
+
+
+
+
+</body>
+
+
+<div class="container" ng-controller="firstController">
+自定義過濾器：(價格超過1萬元的商品)
+    <ul ng-repeat="product in data | filterPrice">
+        <li>
+            id:{{product.id}},
+
+            商品名稱：{{product.name}},
+
+            價格：{{product.price}},
+        </li>
+    </ul>
+
+
+    自定義過濾器2：商品名稱6s
+    <ul ng-repeat="product in data | filterProduct">
+        <li>
+            id:{{product.id}},
+
+            商品名稱：{{product.name}},
+
+            價格：{{product.price}},
+        </li>
+    </ul>
+
+</div>
+
+
+    <script type="text/javascript" src="../../vendor/angular/angular.js"></script>
+
+    <script src="app/index.js"></script>
+</html>
