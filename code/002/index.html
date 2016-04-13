@@ -8,11 +8,16 @@
 
 <body>
     <div ng-controller="firstController">
-        <kittencup-group>
-            <kittencup-collapse ng-repeat="collapse in data" heading="{{collapse.title}}">
-                {{collapse.content}}
-            </kittencup-collapse>
-        </kittencup-group>
+
+
+        <div class="container">
+
+            <kittencup-group>
+                <kittencup-collapse ng-repeat="collapse in data" heading="{{collapse.title}}">
+                    {{collapse.content}}
+                </kittencup-collapse>
+            </kittencup-group>
+        </div>
 
 
 

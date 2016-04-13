@@ -1,6 +1,19 @@
-<div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title" ng-click="onChangeOpen()">
+            <a href="#">
+                {{heading}}
+            </a>
 
-    <ul>
-        <li>111</li>
-    </ul>
+        </h4>
+
+    </div>
+    <div class="panel-collapse" ng-class="{collapse:!isOpen}">
+        <div class="panel-body" ng-transclude>
+
+        </div>
+
+
+    </div>
+
 </div>
