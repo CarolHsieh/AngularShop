@@ -162,8 +162,18 @@ angular.module("myApp", [])
         $scope.toggleHobbySelection = function(id)
         {
 
+            var index = -1;
 
-            var index = $scope.selectItem.hobbies.indexOf(id);
+            if($scope.selectItem.hobbies == undefined)
+            {
+
+                $scope.selectItem.hobbies = [];
+
+            }else {
+
+                index = $scope.selectItem.hobbies.indexOf(id);
+            }
+
 
             if(index===-1)
             {//找索引值，如果沒有在選中的名單中，就加入
@@ -230,16 +240,6 @@ angular.module("myApp", [])
             $scope.addr1 = this.findAddId($scope.addr2);
         }
 
-        //if($scope.selectItem.address!=undefined)
-        //{
-        //
-        //    console.log("$scope.selectItem.address-22--"+$scope.selectItem.address);
-        //
-        //    //$scope.addr1 = this.findAddId($scope.selectItem.address);
-        //
-        //    $scope.addr1 = 1;
-        //    $scope.addr2 = 10;
-        //}
 
 
 
