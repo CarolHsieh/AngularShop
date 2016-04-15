@@ -13,18 +13,18 @@
         <div class="col-sm-10">
             <input type="text" name="username" autocomplete="off" ng-pattern="/^[a-zA-Z]{1}/" ng-required="true" ng-minlength="5" ng-maxlength="8" ng-model="data.username" class="form-control" placeholder="帳號">
 
-            <div ng-show="!myForm.username.$error.pattern && myForm.username.$error.maxlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.username.$dirty && !myForm.username.$error.pattern && myForm.username.$error.maxlength" class="alert alert-danger help-block">
                 帳號不能超過8位
             </div>
-            <div ng-show="!myForm.username.$error.pattern && myForm.username.$error.minlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.username.$dirty && !myForm.username.$error.pattern && myForm.username.$error.minlength" class="alert alert-danger help-block">
                 帳號不能小於5位
             </div>
 
-            <div ng-show="myForm.username.$dirty && myForm.username.$error.required" class="alert alert-danger help-block">
+            <div ng-show="myForm.username.$dirty && myForm.username.$dirty && myForm.username.$error.required" class="alert alert-danger help-block">
                 帳號一定要填寫
             </div>
 
-            <div ng-show="myForm.username.$error.pattern" class="alert alert-danger help-block">
+            <div ng-show="myForm.username.$dirty && myForm.username.$error.pattern" class="alert alert-danger help-block">
                 帳號開頭須為英文字
             </div>
         </div>
@@ -37,18 +37,18 @@
         <div class="col-sm-10"  style="padding-top: 5px;">
             <input type="password" name="password" autocomplete="off" ng-pattern="/^[a-zA-Z]{1}/" ng-required="true" ng-minlength="5" ng-maxlength="8" ng-model="data.password" class="form-control" placeholder="密碼">
 
-            <div ng-show="!myForm.password.$error.pattern && myForm.password.$error.maxlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.password.$dirty && !myForm.password.$error.pattern && myForm.password.$error.maxlength" class="alert alert-danger help-block">
                 密碼不能超過8位
             </div>
-            <div ng-show="!myForm.password.$error.pattern && myForm.password.$error.minlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.password.$dirty && !myForm.password.$error.pattern && myForm.password.$error.minlength" class="alert alert-danger help-block">
                 密碼不能小於5位
             </div>
 
-            <div ng-show="myForm.password.$dirty && myForm.password.$error.required" class="alert alert-danger help-block">
+            <div ng-show="myForm.password.$dirty && myForm.password.$dirty && myForm.password.$error.required" class="alert alert-danger help-block">
                 密碼一定要填寫
             </div>
 
-            <div ng-show="myForm.password.$error.pattern" class="alert alert-danger help-block">
+            <div ng-show="myForm.password.$dirty && myForm.password.$error.pattern" class="alert alert-danger help-block">
                 密碼開頭須為英文字
             </div>
         </div>
@@ -62,7 +62,7 @@
 
 
 
-            <div ng-show="myForm.password.$dirty && data.password!==data.passwordConfirm" class="alert alert-danger help-block">
+            <div ng-show="myForm.passwordConfirm.$dirty && myForm.password.$dirty && data.password!==data.passwordConfirm" class="alert alert-danger help-block">
                 兩次密碼輸入不一致
             </div>
 
@@ -78,18 +78,18 @@
 
 
 
-            <div ng-show="!myForm.email.$error.pattern && myForm.email.$error.minlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.email.$dirty && !myForm.email.$error.pattern && myForm.email.$error.minlength" class="alert alert-danger help-block">
                 email不能小於5位
             </div>
-            <div ng-show="!myForm.email.$error.pattern && myForm.email.$error.maxlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.email.$dirty && !myForm.email.$error.pattern && myForm.email.$error.maxlength" class="alert alert-danger help-block">
                 email不能超過於30位
             </div>
 
-            <div ng-show="myForm.email.$dirty && myForm.email.$error.required" class="alert alert-danger help-block">
+            <div ng-show="myForm.email.$dirty && myForm.email.$dirty && myForm.email.$error.required" class="alert alert-danger help-block">
                 email一定要填寫
             </div>
 
-            <div ng-show="myForm.email.$error.email" class="alert alert-danger help-block">
+            <div ng-show="myForm.email.$dirty && myForm.email.$error.email" class="alert alert-danger help-block">
                 email格式不正確
             </div>
 
@@ -104,17 +104,17 @@
             <input type="number" name="age" autocomplete="off" ng-model="data.age" value=""  placeholder="年齡" min="8" max="98" ng-required="true" ng-maxlength="3" ng-minlength="1" class="form-control" />
 
 
-            <div ng-show="myForm.age.$error.maxlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.age.$dirty && myForm.age.$error.maxlength" class="alert alert-danger help-block">
                 年齡不能超過三位數
             </div>
 
 
-            <div ng-show="myForm.age.$error.minlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.age.$dirty && myForm.age.$error.minlength" class="alert alert-danger help-block">
                 年齡不能小於二位數
             </div>
 
 
-            <div ng-show="myForm.age.$error.min" class="alert alert-danger help-block">
+            <div ng-show="myForm.age.$dirty && myForm.age.$error.min" class="alert alert-danger help-block">
                 年齡要8歲以上
             </div>
 
@@ -131,14 +131,14 @@
 
 
 
-            <div ng-show="!myForm.blog.$error.pattern && myForm.blog.$error.minlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.blog.$dirty && !myForm.blog.$error.pattern && myForm.blog.$error.minlength" class="alert alert-danger help-block">
                 網址不能小於12位
             </div>
-            <div ng-show="!myForm.blog.$error.pattern && myForm.blog.$error.maxlength" class="alert alert-danger help-block">
+            <div ng-show="myForm.blog.$dirty && !myForm.blog.$error.pattern && myForm.blog.$error.maxlength" class="alert alert-danger help-block">
                 網址不能超過於100位
             </div>
 
-            <div ng-show="myForm.blog.$dirty && myForm.blog.$error.required" class="alert alert-danger help-block">
+            <div ng-show="myForm.blog.$dirty && myForm.blog.$dirty && myForm.blog.$error.required" class="alert alert-danger help-block">
                 網址一定要填寫
             </div>
 
@@ -147,7 +147,8 @@
             </div>
 
 
-            <div ng-show="!myForm.blog.$error.pattern && myForm.blog.$error.url" class="alert alert-danger help-block">
+            <div ng-show="myForm.blog.$dirty && !myForm.blog.$error.pattern && myForm.blog.$error.url" class="alert alert-danger help-block">
+            <div ng-show="myForm.blog.$dirty && !myForm.blog.$error.pattern && myForm.blog.$error.url" class="alert alert-danger help-block">
                 網址格式不正確
             </div>
 
@@ -199,7 +200,7 @@
             <div class="col-sm-10" style="padding-top:5px; ">
 
                 <label ng-repeat="hobby in hobbys" class="cehckbox-inline">
-                    <input type="checkbox" name="hobby[]" ng-model="data.hobbys" value="{{hobby.id}}" ng-checked="selectItem.hobbies.indexOf(hobby.id)!==-1" ng-click="toggleHobbySelection(hobby.id)" /> {{hobby.name}}
+                    <input type="checkbox" name="hobby[]" ng-model="data.hobbys" value="{{hobby.id}}" ng-checked="data.hobbies.indexOf(hobby.id)!==-1" ng-click="toggleHobbySelection(hobby.id)" /> {{hobby.name}}
                 </label>
             </div>
         </div>
@@ -209,7 +210,7 @@
         <div class="form-group">
             <div class="col-sm-offset-0 col-sm-10" style="padding-top: 15px;">
                 <button ng-disabled="myForm.$invalid || selectItem.hobbies.length===0 || selectItem.hobbies===undefined"  type="submit" class="btn btn-default">註冊</button>
-                <button type="button" class="btn btn-default">RESET</button>
+                <button type="reset" class="btn btn-default" ng-click="reset()">RESET</button>
             </div>
         </div>
 

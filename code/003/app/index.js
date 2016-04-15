@@ -28,6 +28,7 @@ angular.module("myApp", [])
 
     .controller('firstController',['$scope',function($scope){
 
+        var that = this;
         $scope.hobbys = [
             {
                 'id':1,
@@ -164,40 +165,56 @@ angular.module("myApp", [])
 
             var index = -1;
 
-            if($scope.selectItem.hobbies == undefined)
+            if($scope.data.hobbies == undefined)
             {
 
-                $scope.selectItem.hobbies = [];
+                $scope.data.hobbies = [];
 
             }else {
 
-                index = $scope.selectItem.hobbies.indexOf(id);
+                index = $scope.data.hobbies.indexOf(id);
             }
 
 
             if(index===-1)
             {//找索引值，如果沒有在選中的名單中，就加入
 
-                $scope.selectItem.hobbies.push(id);
+                $scope.data.hobbies.push(id);
             }else{
              //如果在名單中，就移除(反選的效用)
 
-                $scope.selectItem.hobbies.splice(index,1);
+                $scope.data.hobbies.splice(index,1);
             }
 
 
-            console.log('$scope.selectHobby--'+$scope.selectItem.hobbies);
+            console.log('$scope.selectHobby--'+$scope.data.hobbies);
 
         }
 
 
 
         //預設值
-        $scope.selectItem ={
+        $scope.data ={
 
             'hobbies':[2],//興趣
             'address':3201//地址
         } ;
+
+
+
+        //先保留一份默認值(把預設值copy給原始ata)
+        $scope.orginData = angular.copy($scope.data);
+
+        $scope.reset = function()
+        {
+
+            $scope.data = angular.copy($scope.orginData);
+
+            that.initCity();//地址還原為預設值
+            $scope.myForm.$setPristine();//angulark表單的重置,myForm.blog.$dirty 髒檢查才能發揮作用
+
+        }
+
 
 
 
@@ -227,20 +244,21 @@ angular.module("myApp", [])
         //從預設值的地址id尋找所屬的第一層～～第四層的下拉選單 end
 
 
+        this.initCity = function() {
+            if ($scope.data.address !== undefined) {
 
-        if ($scope.selectItem.address !== undefined) {
 
+                $scope.addr4 = $scope.data.address;
 
-            $scope.addr4 = $scope.selectItem.address;
+                $scope.addr3 = this.findAddId($scope.addr4);
 
-            $scope.addr3 = this.findAddId($scope.addr4);
+                $scope.addr2 = this.findAddId($scope.addr3);
 
-            $scope.addr2 = this.findAddId($scope.addr3);
+                $scope.addr1 = this.findAddId($scope.addr2);
+            }
 
-            $scope.addr1 = this.findAddId($scope.addr2);
         }
 
 
-
-
+        this.initCity.call(this);//第一次進入調用，初始化地址預設選單，使用call是為了把this傳過去，不然就要把調用initCity function裡面的this改成that了
     }]);
