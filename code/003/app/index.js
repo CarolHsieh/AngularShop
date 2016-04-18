@@ -25,7 +25,80 @@ angular.module("myApp", [])
         }
 
     })
+    .directive('even',function(){
 
+
+
+        return {
+            require:'ngModel',
+            link:function(scope,elm,attrs,ngModelController)
+            {
+                //驗證input一定要為偶數 begin
+                ngModelController.$parsers.push(function(viewValue){
+
+
+
+                    if(viewValue % 2 ===0)
+                    {
+
+                        ngModelController.$setValidity('even',true);
+                    }else{
+                        ngModelController.$setValidity('even',false);
+
+                    }
+
+                    return viewValue;
+                });
+                //驗證input一定要為偶數 end
+
+
+
+            }
+
+        }
+    })
+    .directive('customerTextarea',function(){
+
+
+        return {
+            restrict:'E',
+            require:'ngModel',
+            replace:'true',
+            template:'<div contenteditable="true" class="form-group" style="border:#3c3c3c solid 1px; width=100%"></div>',
+            link:function(scope,iElement,iAttr,ngModelController)
+            {
+
+
+
+
+                    iElement.on('keyup',function(){
+
+
+                        scope.$apply(function(){//髒檢查，如果沒有執行髒檢查，ngModelController就不會執行$render方法
+
+                            //view -> model
+                            ngModelController.$setViewValue(iElement.html());//把元素上面的值保留在$viewValue裡面
+
+                        })
+
+
+                    });
+
+
+
+
+                ngModelController.$render = function()
+                {
+
+                    //model -> view
+                    iElement.html(ngModelController.$viewValue);//從$viewValue裡面取值出來
+                }
+
+            }
+
+
+        }
+    })
     .controller('firstController',['$scope',function($scope){
 
         var that = this;
